@@ -1,15 +1,19 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/*.py",             "use": "@vercel/python" },
-    { "src": "frontend/package.json", "use": "@vercel/static-build" }
-  ],
-  "functions": {
-    "api/*.py": {
-      "runtime": "python3.11",
-      "maxDuration": 10
+    {
+      "src": "api/*.py",
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.11",
+        "maxDuration": 10
+      }
+    },
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build"
     }
-  },
+  ],
   "routes": [
     { "src": "/api/(.*)", "dest": "api/$1.py" },
     { "src": "/(.*)",     "dest": "frontend/dist/$1" }
