@@ -5,7 +5,13 @@
     { "src": "frontend/package.json", "use": "@vercel/static-build" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "api/$1.js" },
-    { "src": "/(.*)",     "dest": "frontend/dist/$1" }
-  ]
+    {
+      "src": "/api/(.*)",
+      "dest": "api/$1.js",
+      "headers": {
+        "cache-control": "s-maxage=300, stale-while-revalidate"
+      }
+    },
+    { "src": "/(.*)", "dest": "frontend/dist/$1" }
+    ]
 }
